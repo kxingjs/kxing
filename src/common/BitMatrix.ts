@@ -94,7 +94,7 @@ export default class BitMatrix {
         for (let y = top; y < bottom; y++) {
             const offset = y * this._rowSize;
             for (let x = left; x < right; x++) {
-                this._bits[offset + (x >> 5)] |= 1 << (x & 0x1f);
+                this._bits[Math.floor(offset + (x / 32))] |= 1 << (x & 0x1f);
             }
         }
     };
