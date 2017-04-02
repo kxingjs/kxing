@@ -18,6 +18,10 @@ export abstract class DataMask {
     }
 
     abstract isMasked(i, j): boolean;
+
+    static values(): DataMask[] {
+        return VALUES;
+    }
 }
 
 export class DataMask000 extends DataMask {
@@ -67,3 +71,14 @@ export class DataMask111 extends DataMask {
         return ((i + j + ((i * j) % 3)) & 0x01) == 0;
     }
 }
+
+const VALUES:DataMask[] = [
+    new DataMask000(),
+    new DataMask001(),
+    new DataMask010(),
+    new DataMask011(),
+    new DataMask100(),
+    new DataMask101(),
+    new DataMask110(),
+    new DataMask111()
+];
