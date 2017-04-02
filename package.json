@@ -1,0 +1,24 @@
+{
+  "name": "kxing",
+  "version": "1.0.0",
+  "description": "ZXing, barcode image processing, porting/rewite library.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TatsuyaYamamoto/kxing.git"
+  },
+  "keywords": [
+    "zxing",
+    "qrcode",
+    "kogera",
+    "barcode"
+  ],
+  "author": "Tatsuya Yamamoto",
+  "licenses": [{
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  }]
+}
