@@ -6,3 +6,17 @@ export function bitCount(i: number): number {
     i = i + (i >>> 16);
     return i & 0x3f;
 }
+
+/**
+ * {@link https://docs.oracle.com/javase/jp/8/docs/api/java/lang/System.html#arraycopy-java.lang.Object-int-java.lang.Object-int-int-}
+ */
+export function arraycopy(src: any[], srcPos: number, dest: any[], destPos: number, length: number) {
+    if (src == null || dest == null) {
+        throw new Error("src and dest array should not be null.")
+    }
+    const slicedSrc = src.slice(srcPos, srcPos + length);
+
+    for (let i = 0; i < slicedSrc.length; i++) {
+        dest[destPos + i] = slicedSrc[i];
+    }
+}
