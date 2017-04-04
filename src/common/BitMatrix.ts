@@ -27,9 +27,6 @@ export default class BitMatrix {
     get height():number{
         return this._height;
     }
-    get dimension():number{
-        return this._width;
-    }
     get rowSize():number{
         return this._rowSize;
     }
