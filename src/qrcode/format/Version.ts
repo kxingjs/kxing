@@ -4,7 +4,7 @@ import IllegalArgumentError from "../../error/IllegalArgumentError";
 import FormatError from "../../error/FormatError";
 import {ErrorCorrectionLevel} from "./ErrorCorrectionLevel";
 
-class ECB {
+export class ECB {
     public _count: number;
     public _dataCodewords: number;
 
@@ -22,7 +22,7 @@ class ECB {
     }
 }
 
-class ECBlocks {
+export class ECBlocks {
     public _ecCodewordsPerBlock: number;
     public _ecBlocks: ECB[] = [];
 
