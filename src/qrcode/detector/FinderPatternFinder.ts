@@ -30,6 +30,11 @@ export class FinderPatternFinderResult {
     }
 }
 
+/**
+ * Porting from {@link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/qrcode/detector/FinderPatternFinder.java}
+ *
+ * @author Tatsuya Yamamoto
+ */
 export default class FinderPatternFinder {
     private _bits: number[];
     private _width: number;
@@ -192,7 +197,8 @@ export default class FinderPatternFinder {
      * @param centerJ center of the section that appears to cross a finder pattern
      * @param maxCount maximum reasonable number of modules that should be
      * observed in any reading state, based on the results of the horizontal scan
-     * @return vertical center of finder pattern, or {@link Float#NaN} if not found
+     * @param originalStateCountTotal
+     * @return vertical center of finder pattern, or {@link NaN} if not found
      */
     private crossCheckVertical(startI: number,
                                centerJ: number,
