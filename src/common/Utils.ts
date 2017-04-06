@@ -20,3 +20,16 @@ export function arraycopy(src: any[], srcPos: number, dest: any[], destPos: numb
         dest[destPos + i] = slicedSrc[i];
     }
 }
+
+export function distance(pattern1, pattern2) {
+    const xDiff = pattern1.x - pattern2.x;
+    const yDiff = pattern1.y - pattern2.y;
+    return Math.sqrt((xDiff * xDiff + yDiff * yDiff));
+}
+
+/// <summary> Returns the z component of the cross product between vectors BC and BA.</summary>
+export function crossProductZ(pointA, pointB, pointC) {
+    const bX = pointB.x;
+    const bY = pointB.y;
+    return ((pointC.x - bX) * (pointA.y - bY)) - ((pointC.y - bY) * (pointA.x - bX));
+}
