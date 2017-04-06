@@ -23,7 +23,7 @@ describe("Mode", function () {
         });
     });
     describe("testCharacterCount", function () {
-        it("should throw error with illegal version number", function () {
+        it("should return character count with QRcode version.", function () {
             expect(10).to.be.equal(new NumericMode().getCharacterCountBits(Version.getVersionForNumber(5)));
             expect(12).to.be.equal(new NumericMode().getCharacterCountBits(Version.getVersionForNumber(26)));
             expect(14).to.be.equal(new NumericMode().getCharacterCountBits(Version.getVersionForNumber(40)));
