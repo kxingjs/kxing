@@ -2,7 +2,7 @@ import Version from '../format/Version';
 import FormatInformation from '../format/FormatInformation';
 import BitMatrix from "../../common/BitMatrix";
 import {DataMask} from "../format/DataMask";
-import FormatError from "../error/FormatError";
+import FormatError from "../../error/FormatError";
 
 /**
  * Porting from {@link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/qrcode/decoder/BitMatrixParser.java}
