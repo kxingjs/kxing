@@ -34,6 +34,10 @@ export default class BitMatrix {
         return this._bits;
     }
 
+    set bits(bits: number[]) {
+        this._bits = bits;
+    }
+
     /**
      * <p>Gets the requested bit, where true means black.</p>
      *
