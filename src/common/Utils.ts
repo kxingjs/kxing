@@ -21,10 +21,28 @@ export function arraycopy(src: any[], srcPos: number, dest: any[], destPos: numb
     }
 }
 
-export function distance(pattern1, pattern2) {
+/**
+ * @param pattern1 first pattern
+ * @param pattern2 second pattern
+ * @return distance between two points
+ */
+export function distance(pattern1: {x: number, y: number}, pattern2: {x: number, y: number}) {
     const xDiff = pattern1.x - pattern2.x;
     const yDiff = pattern1.y - pattern2.y;
     return Math.sqrt((xDiff * xDiff + yDiff * yDiff));
+}
+
+/**
+ * Ends up being a bit faster than {@link Math#round(float)}. This merely rounds its
+ * argument to the nearest int, where x.5 rounds up to x+1. Semantics of this shortcut
+ * differ slightly from {@link Math#round(float)} in that half rounds down for negative
+ * values. -2.5 rounds to -3, not -2. For purposes here it makes no difference.
+ *
+ * @param d real value to round
+ * @return nearest {@code int}
+ */
+export function round(d: number): number {
+    return Math.floor(d + (d < 0.0 ? -0.5 : 0.5));
 }
 
 /// <summary> Returns the z component of the cross product between vectors BC and BA.</summary>
