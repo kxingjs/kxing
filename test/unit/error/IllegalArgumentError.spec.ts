@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import IllegalArgumentError from "../../src/error/IllegalArgumentError";
+import IllegalArgumentError from "../../../src/error/IllegalArgumentError";
 
 describe("IllegalArgumentError", function () {
     describe("constructor()", function () {

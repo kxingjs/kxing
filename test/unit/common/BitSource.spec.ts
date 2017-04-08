@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import BitSource from "../../src/common/BitSource";
+import BitSource from "../../../src/common/BitSource";
 
 describe("BitSource", function () {
     describe("testSource", function () {

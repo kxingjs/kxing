@@ -1,6 +1,6 @@
 import {expect} from 'chai';
-import BitMatrix from '../../src/common/BitMatrix'
-import IllegalArgumentError from "../../src/error/IllegalArgumentError";
+import BitMatrix from '../../../src/common/BitMatrix'
+import IllegalArgumentError from "../../../src/error/IllegalArgumentError";
 
 describe("BitMatrix", function () {
     describe("constructor()", function () {

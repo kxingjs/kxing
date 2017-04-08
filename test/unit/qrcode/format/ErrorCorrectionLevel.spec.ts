@@ -6,7 +6,7 @@ import {
     LevelQ,
     LevelH,
     forBits
-} from '../../../src/qrcode/format/ErrorCorrectionLevel'
+} from '../../../../src/qrcode/format/ErrorCorrectionLevel'
 
 describe("LevelL", function () {
     describe("bit", function () {
