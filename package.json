@@ -4,7 +4,8 @@
   "description": "ZXing, barcode image processing, porting/rewite library.",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "./node_modules/karma/bin/karma start",
+    "test:ci": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
