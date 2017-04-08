@@ -10,15 +10,15 @@ import {ECB} from "../format/Version";
  * @author Tatsuya Yamamoto
  */
 export default class DataBlock {
-    private _numDataCodewords;
-    private _codewords;
+    private _numDataCodewords: number;
+    private _codewords: number[];
 
-    constructor(numDataCodewords: number, codewords) {
+    constructor(numDataCodewords: number, codewords: number[]) {
         this._numDataCodewords = numDataCodewords;
         this._codewords = codewords;
     }
 
-    get numDataCodewords(){
+    get numDataCodewords(): number {
         return this._numDataCodewords;
     }
 
@@ -26,7 +26,20 @@ export default class DataBlock {
         return this._codewords;
     }
 
-    static getDataBlocks(rawCodewords: number[], version: Version, ecLevel: ErrorCorrectionLevel): DataBlock[] {
+    /**
+     * <p>When QR Codes use multiple data blocks, they are actually interleaved.
+     * That is, the first byte of data block 1 to n is written, then the second bytes, and so on. This
+     * method will separate the data into original blocks.</p>
+     *
+     * @param rawCodewords bytes as read directly from the QR Code
+     * @param version version of the QR Code
+     * @param ecLevel error-correction level of the QR Code
+     * @return DataBlocks containing original bytes, "de-interleaved" from representation in the
+     *         QR Code
+     */
+    static getDataBlocks(rawCodewords: number[],
+                         version: Version,
+                         ecLevel: ErrorCorrectionLevel): DataBlock[] {
 
         if (rawCodewords.length != version.totalCodewords) {
             throw new IllegalArgumentError();
@@ -46,7 +59,6 @@ export default class DataBlock {
         // Now establish DataBlocks of the appropriate size and number of data codewords
         const result: DataBlock[] = [];
         let numResultBlocks: number = 0;
-
         for (let j = 0; j < ecBlockArray.length; j++) {
             const ecBlock: ECB = ecBlockArray[j];
             for (let i = 0; i < ecBlock.count; i++) {
