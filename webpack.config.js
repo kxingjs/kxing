@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: "./src/Index.ts",
+    entry: "./src/index.ts",
     output: {
         path: path.resolve(__dirname, `dist`),
         filename: `kxing.js`,

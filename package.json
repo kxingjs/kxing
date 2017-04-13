@@ -4,8 +4,13 @@
   "description": "ZXing, barcode image processing, porting/rewite library.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start",
-    "test:ci": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "clean": "rimraf es dist",
+    "build": "npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build:es": "tsc --target es6 --outDir es",
+    "build:umd": "webpack",
+    "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
+    "test": "karma start",
+    "test:ci": "karma start --single-run --browsers PhantomJS"
   },
   "repository": {
     "type": "git",
@@ -28,6 +33,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^2.0.3",
     "mocha": "^3.2.0",
+    "rimraf": "^2.6.1",
     "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
     "webpack": "^2.3.2"
