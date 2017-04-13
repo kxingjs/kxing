@@ -2,7 +2,7 @@
   "name": "kxing",
   "version": "1.0.0",
   "description": "ZXing, barcode image processing, porting/rewite library.",
-  "main": "index.js",
+  "main": "./dist/kxing.js",
   "scripts": {
     "clean": "rimraf es dist",
     "build": "npm run build:es && npm run build:umd && npm run build:umd:min",
@@ -10,8 +10,14 @@
     "build:umd": "webpack",
     "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
     "test": "karma start",
-    "test:ci": "karma start --single-run --browsers PhantomJS"
+    "test:ci": "karma start --single-run --browsers PhantomJS",
+    "prepublish": "npm run clean && npm run build"
   },
+  "files": [
+    "dist",
+    "es",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TatsuyaYamamoto/kxing.git"
