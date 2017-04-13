@@ -4,11 +4,14 @@
       "DOM",
       "ES6"
     ],
-    "target": "ES5",
-    "module": "ES6",
+    "target": "es5",
+    "module": "es6",
     "allowJs": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
 }
