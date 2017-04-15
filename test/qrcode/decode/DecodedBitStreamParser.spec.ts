@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import DecodedBitStreamParser from "../../../../src/qrcode/decode/DecodedBitStreamParser";
-import Version from "../../../../src/qrcode/format/Version";
-import DecoderResult from "../../../../src/common/DecoderResult";
+import DecodedBitStreamParser from "../../../src/qrcode/decode/DecodedBitStreamParser";
+import Version from "../../../src/qrcode/format/Version";
+import DecoderResult from "../../../src/common/DecoderResult";
 
 describe("DecodedBitStreamParser", function () {
     describe("byte mode", function () {

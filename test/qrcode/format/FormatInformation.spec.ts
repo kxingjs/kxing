@@ -1,7 +1,7 @@
 import {expect} from 'chai';
-import FormatInformation from '../../../../src/qrcode/format/FormatInformation'
-import {LevelQ} from "../../../../src/qrcode/format/ErrorCorrectionLevel";
-import {DataMask} from "../../../../src/qrcode/format/DataMask";
+import FormatInformation from '../../../src/qrcode/format/FormatInformation'
+import {LevelQ} from "../../../src/qrcode/format/ErrorCorrectionLevel";
+import {DataMask} from "../../../src/qrcode/format/DataMask";
 
 
 describe("FormatInformation", function () {

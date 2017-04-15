@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import Version from '../../../../src/qrcode/format/Version'
-import IllegalArgumentError from "../../../../src/error/IllegalArgumentError";
+import Version from '../../../src/qrcode/format/Version'
+import IllegalArgumentError from "../../../src/error/IllegalArgumentError";
 import {
     forBits, TerminatorMode, NumericMode, AlphaNumericMode, ByteMode, KanjiMode
-} from "../../../../src/qrcode/format/Mode";
+} from "../../../src/qrcode/format/Mode";
 
 
 describe("Mode", function () {
