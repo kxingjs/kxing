@@ -1,6 +1,6 @@
 {
   "name": "kxing",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "ZXing, barcode image processing, porting/rewite library.",
   "main": "./dist/kxing.js",
   "scripts": {
