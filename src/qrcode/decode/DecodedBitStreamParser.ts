@@ -149,7 +149,7 @@ export default class DecodedBitStreamParser {
         if (value >= DecodedBitStreamParser.ALPHANUMERIC_CHARS.length) {
             throw new FormatError();
         }
-        return DecodedBitStreamParser.ALPHANUMERIC_CHARS[value];
+        return DecodedBitStreamParser.ALPHANUMERIC_CHARS[Math.floor(value)];
     }
 
     private static  decodeAlphanumericSegment(bits: BitSource,
