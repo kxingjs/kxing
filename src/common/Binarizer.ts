@@ -34,7 +34,7 @@ function convertGreyscale(image: ImageData): number[] {
             const r: number = image.data[point];
             const g: number = image.data[point + 1];
             const b: number = image.data[point + 2];
-            luminances[x + y * image.width] = (r * 33 + g * 34 + b * 33) / 100;
+            luminances[x + y * image.width] = Math.floor((r * 33 + g * 34 + b * 33) / 100);
         }
     }
     return luminances;
@@ -47,11 +47,12 @@ function convertGreyscale(image: ImageData): number[] {
  * @returns {number}
  */
 function calculateThresholdWithOtsuMethod(luminanceArray: number[]) {
+
     const luminanceHistgram: number[] = [];
+    for (let i = MIN_LUMINANCE_VALUE; i <= MAX_LUMINANCE_VALUE; i++) {
+        luminanceHistgram[i] = 0;
+    }
     luminanceArray.forEach(function (lu) {
-        if (isNaN(luminanceHistgram[lu])) {
-            luminanceHistgram[lu] = 0;
-        }
         luminanceHistgram[lu]++;
     });
 
@@ -75,7 +76,7 @@ function calculateThresholdWithOtsuMethod(luminanceArray: number[]) {
             blackArea.sum += j * luminanceHistgram[j];
         }
 
-        for (let j = i + 1; j < MAX_LUMINANCE_VALUE; ++j) {
+        for (let j = i + 1; j <= MAX_LUMINANCE_VALUE; ++j) {
             whiteArea.pixels += luminanceHistgram[j];
             whiteArea.sum += j * luminanceHistgram[j];
         }
