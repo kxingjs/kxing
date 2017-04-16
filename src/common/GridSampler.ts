@@ -22,7 +22,7 @@ export default class GridSampler {
                transform: PerspectiveTransform): BitMatrix {
 
         if (dimensionX <= 0 || dimensionY <= 0) {
-            throw new NotFoundError();
+            throw new NotFoundError("x or y dimension of the code is Less than 1.");
         }
 
         const bits = new BitMatrix(dimensionX, dimensionY);

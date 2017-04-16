@@ -124,7 +124,7 @@ export default class AlignmentPatternFinder {
             return this.possibleCenters[0];
         }
 
-        throw new NotFoundError();
+        throw new NotFoundError("Cound not find an AlignmentPattern.");
     }
 
     /**

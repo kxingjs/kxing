@@ -435,8 +435,7 @@ export default class FinderPatternFinder {
 
         const startSize = this._possibleCenters.length;
         if (startSize < 3) {
-            // Couldn't find enough finder patterns
-            throw new NotFoundError();
+            throw new NotFoundError("Couldn't find enough finder patterns.");
         }
 
         // Filter outlier possibilities whose module size is too different

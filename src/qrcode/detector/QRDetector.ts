@@ -37,7 +37,7 @@ export default class QRDetector {
 
         const moduleSize = this.calculateModuleSize(topLeft, topRight, bottomLeft);
         if (moduleSize < 1.0) {
-            throw new NotFoundError();
+            throw new NotFoundError("Couldn't detect a code that has module size enough.");
         }
 
         const dimension: number = QRDetector.computeDimension(topLeft, topRight, bottomLeft, moduleSize);
@@ -146,7 +146,7 @@ export default class QRDetector {
                 break;
 
             case 3:
-                throw new NotFoundError();
+                throw new NotFoundError("Could not compute valid dimension.");
         }
         return dimension;
     };
@@ -321,13 +321,13 @@ export default class QRDetector {
         const alignmentAreaLeftX = Math.max(0, estAlignmentX - allowance);
         const alignmentAreaRightX = Math.min(this._width - 1, estAlignmentX + allowance);
         if (alignmentAreaRightX - alignmentAreaLeftX < overallEstModuleSize * 3) {
-            throw new NotFoundError();
+            throw new NotFoundError("an unexpected error occurs during detection");
         }
 
         const alignmentAreaTopY = Math.max(0, estAlignmentY - allowance);
         const alignmentAreaBottomY = Math.min(this._height - 1, estAlignmentY + allowance);
         if (alignmentAreaBottomY - alignmentAreaTopY < overallEstModuleSize * 3) {
-            throw new NotFoundError();
+            throw new NotFoundError("an unexpected error occurs during detection");
         }
 
         const alignmentFinder = new AlignmentPatternFinder(
