@@ -1,5 +1,16 @@
 # KXing Change Log
 
+## v1.1.2
+
+- bug fix
+	- can't binarize a color image.
+
+## v1.1.1
+
+- add sample application.
+- edit README for installation and usage.
+
+
 ## v1.1.0
 
 - bug fix
