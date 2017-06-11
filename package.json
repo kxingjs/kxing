@@ -3,9 +3,10 @@
   "version": "1.1.2",
   "description": "ZXing, barcode image processing, porting/rewite library.",
   "main": "./dist/kxing.js",
+  "jsnext:main": "./es/KXing.js",
   "scripts": {
     "clean": "rimraf es dist",
-    "build": "npm run build:es && npm run build:umd && npm run build:umd:min",
+    "build": "npm run clean && npm run build:es && npm run build:umd && npm run build:umd:min",
     "build:es": "tsc --target es6 --outDir es",
     "build:umd": "webpack",
     "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
