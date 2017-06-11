@@ -1,6 +1,6 @@
 # KXing
 
-[![Build Status](https://travis-ci.org/TatsuyaYamamoto/kxing.svg?branch=master)](https://travis-ci.org/TatsuyaYamamoto/kxing)
+[![Build Status](https://travis-ci.org/kxingjs/kxing.svg?branch=master)](https://travis-ci.org/kxingjs/kxing)
 
 [![NPM](https://nodei.co/npm/kxing.png?compact=true)](https://nodei.co/npm/kxing/)
 
