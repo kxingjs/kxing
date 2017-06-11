@@ -5,7 +5,7 @@ describe("IllegalArgumentError", function () {
     describe("constructor()", function () {
         it("should be error type.", function () {
             const error: IllegalArgumentError = new IllegalArgumentError();
-            expect(error).to.be.an.instanceof(Error);
+            expect(error).to.be.an.instanceof(IllegalArgumentError);
         });
     });
 
