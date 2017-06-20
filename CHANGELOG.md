@@ -1,5 +1,9 @@
 # KXing Change Log
 
+## v1.1.4
+
+- bug fix
+
 ## v1.1.3
 
 - support [jsnext:main](https://github.com/jsforum/jsforum/issues/5).
