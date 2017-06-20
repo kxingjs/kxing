@@ -5,6 +5,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, `dist`),
         filename: `kxing.js`,
+        library: 'KXing',
         libraryTarget: "umd",
     },
     resolve: {
