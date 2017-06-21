@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TatsuyaYamamoto/kxing.git"
+    "url": "git+https://github.com/kxingjs/kxing.git"
   },
   "keywords": [
     "zxing",
