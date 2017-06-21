@@ -31,9 +31,42 @@ your_project/
 
 You can use it within the browser. Found UMD KXing file within node_modules. 
 
-```
+```html
 <script src="./node_modules/kxing/dist/kxing.js"></script>
 <script>
     var result = KXing.getReader().decode(imageData);
 </script>
 ```
+
+### With bundler
+
+If you use bundler, import as ES6 module.
+
+```js
+import {getReader} from 'kxing';
+const result = getReader().decode(imageData);
+```
+
+## API
+
+### `reader = getReader()`
+***Getter that KXing [Reader](https://github.com/kxingjs/kxing/blob/master/src/Reader.ts) instance.***
+
+- The instance can be reused.
+
+#### Important notes
+Current version can provide [QRCodeReader](https://github.com/kxingjs/kxing/blob/master/src/qrcode/QRCodeReader.ts) only.
+
+
+### `result = reader.decode(imageData)`
+
+***Decode a barcode image and return result object.***
+
+- ```imageData``` is [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) instance, pixel data of an area of a canvas element. You can get it from [CanvasRenderingContext2D.getImageData()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData).
+- ```decode()``` provide ```result``` that has some values:
+	- text: Decoded string.
+	- rawBytes: Raw bytes encoded by the barcode
+	- numBits: Number of valid bits.
+	- barcodeFormat
+	- timestamp
+- In case to fail decode, throw Error: (e.g.: NotFoundError, FormatError).
