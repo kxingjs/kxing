@@ -12,7 +12,6 @@ export default class GenericGF {
     private _zero: GenericGFPoly;
     private _one: GenericGFPoly;
     private _size: number;
-    private _primitive: number;
     private _generatorBase: number;
 
     /**
@@ -27,7 +26,6 @@ export default class GenericGF {
      *  In most cases it should be 1, but for QR code it is 0.
      */
     constructor(primitive: number, size?: number, b?: number) {
-        this._primitive = primitive;
         this._size = size;
         this._generatorBase = b;
 

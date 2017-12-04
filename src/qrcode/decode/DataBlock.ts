@@ -50,11 +50,7 @@ export default class DataBlock {
         const ecBlocks: ECBlocks = version.getECBlocksForLevel(ecLevel);
 
         // First count the total number of data blocks
-        let totalBlocks: number = 0;
         const ecBlockArray: ECB[] = ecBlocks.ecBlocks;
-        for (let i = 0; i < ecBlockArray.length; i++) {
-            totalBlocks += ecBlockArray[i].count;
-        }
 
         // Now establish DataBlocks of the appropriate size and number of data codewords
         const result: DataBlock[] = [];
