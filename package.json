@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf es dist",
     "build": "npm run clean && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "build:es": "tsc --target es6 --outDir es",
+    "build:es": "tsc --target es6 --outDir es --declaration",
     "build:umd": "webpack",
     "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
     "test": "karma start --single-run --browsers PhantomJS_custom",
