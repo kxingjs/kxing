@@ -6,18 +6,28 @@ import MultiDetector from "./detector/MultiDetector";
 import BitMatrix from "../../common/BitMatrix";
 
 /**
+ * This implementation can detect and decode multiple QR Codes in an image.
+ *
+ * @link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/multi/qrcode/QRCodeMultiReader.java
  * TODO: Support StructuredAppend.
  */
 class QRCodeMultiReader extends QRCodeReader implements MultipleBarcodeReader {
 
+    /**
+     * Decode multiple QRCodes.
+     *
+     * @param {ImageData} image
+     * @return {Result[]}
+     * @override
+     */
     public decodeMultiple(image: ImageData): Result[] {
         const results: Result[] = [];
         const detector = new MultiDetector(image);
         const detectedCodes: BitMatrix[] = detector.detectMulti();
 
-        detectedCodes.forEach((barcord) => {
+        detectedCodes.forEach((barcode) => {
             try {
-                const decorded = this._decode(barcord);
+                const decorded = this._decode(barcode);
                 results.push(new Result(decorded.text, decorded.rawBytes, BarcodeFormat.QR_CODE));
             } catch (e) {
                 // ignore and continue
