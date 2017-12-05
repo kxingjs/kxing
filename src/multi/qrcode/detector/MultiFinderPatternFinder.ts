@@ -1,6 +1,5 @@
 import FinderPatternFinder, {FinderPatternFinderResult} from "../../../qrcode/detector/FinderPatternFinder";
 import FinderPattern from "../../../qrcode/format/FinderPattern";
-import NotFoundError from "../../../error/NotFoundError";
 
 /**
  * Attempts to find finder patterns in a QR Code.
@@ -33,7 +32,6 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
      * @return the 3 best {@link FinderPattern}s from our list of candidates. The "best" are
      *         those that have been detected at least {@link #CENTER_QUORUM} times, and whose module
      *         size differs from the average among those patterns the least
-     * @throws NotFoundException if 3 such finder patterns do not exist
      */
     private selectMutipleBestPatterns(): FinderPattern[][] {
         const possibleCenters: FinderPattern[] = this.possibleCenters;
@@ -46,7 +44,8 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
         } = MultiFinderPatternFinder;
 
         if (size < 3) {
-            throw new NotFoundError("Couldn't find enough finder patterns");
+            // Nothing found.
+            return [[]];
         }
 
         /*
@@ -158,16 +157,12 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
             } // end iterate p2
         } // end iterate p1
 
-        if (results.length !== 0) {
-            return results;
-        }
-
-        throw new NotFoundError("Nothing found.")
+        return results;
     }
 
     /**
      * Find multi QRCodes.
-     * 
+     *
      * @return {FinderPatternFinderResult[]}
      */
     public findMulti(): FinderPatternFinderResult[] {
