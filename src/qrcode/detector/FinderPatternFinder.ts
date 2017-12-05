@@ -2,10 +2,6 @@ import FinderPattern from '../format/FinderPattern';
 import {distance, crossProductZ} from "../../common/Utils";
 import NotFoundError from "../../error/NotFoundError";
 
-const MIN_SKIP = 3;
-const MAX_MODULES = 57;
-const CENTER_QUORUM = 2;
-
 export class FinderPatternFinderResult {
     private _topLeft: FinderPattern;
     private _topRight: FinderPattern;
@@ -36,6 +32,10 @@ export class FinderPatternFinderResult {
  * @author Tatsuya Yamamoto
  */
 export default class FinderPatternFinder {
+    protected static MIN_SKIP = 3;
+    protected static MAX_MODULES = 57;
+    protected static CENTER_QUORUM = 2;
+
     private _bits: number[];
     private _width: number;
     private _height: number;
@@ -48,14 +48,34 @@ export default class FinderPatternFinder {
         this._height = height;
     }
 
+    public get bits(): number[] {
+        return this._bits;
+    }
+
+    public get width(): number {
+        return this._width;
+    }
+
+    public get height(): number {
+        return this._height;
+    }
+
+    public get possibleCenters(): FinderPattern[] {
+        return this._possibleCenters;
+    }
+
+    public get hasSkipped(): boolean {
+        return this._hasSkipped;
+    }
+
     public find(): FinderPatternFinderResult {
         const imageHeigth = this._height;
         const imageWidth = this._width;
 
-        let iSkip: number = Math.floor(imageHeigth * 0.25 * (1 / MAX_MODULES) * 3);
+        let iSkip: number = Math.floor(imageHeigth * 0.25 * (1 / FinderPatternFinder.MAX_MODULES) * 3);
 
-        if (iSkip < MIN_SKIP) {
-            iSkip = MIN_SKIP;
+        if (iSkip < FinderPatternFinder.MIN_SKIP) {
+            iSkip = FinderPatternFinder.MIN_SKIP;
         }
 
         let done: boolean = false;
@@ -163,7 +183,7 @@ export default class FinderPatternFinder {
      * @return true iff the proportions of the counts is close enough to the 1/1/3/1/1 ratios
      *         used by finder patterns to be considered a match
      */
-    private static foundPatternCross(stateCount: number[]) {
+    protected static foundPatternCross(stateCount: number[]) {
         let totalModuleSize: number = 0;
         for (let i = 0; i < 5; i++) {
             let count = stateCount[i];
@@ -358,7 +378,7 @@ export default class FinderPatternFinder {
      * @param horizontalIndex   end of possible finder pattern in row
      * @return true if a finder pattern candidate was found this time
      */
-    private handlePossibleCenter(stateCount: number[], verticalIndex: number, horizontalIndex: number) {
+    protected handlePossibleCenter(stateCount: number[], verticalIndex: number, horizontalIndex: number) {
         const stateCountTotal: number = stateCount.reduce(function (previousValue, currentValue) {
             return previousValue + currentValue;
         });
@@ -401,7 +421,7 @@ export default class FinderPatternFinder {
         let confirmedCount: number = 0;
         let totalModuleSize: number = 0.0;
         this._possibleCenters.forEach(function (possibleCenter: FinderPattern) {
-            if (possibleCenter.count >= CENTER_QUORUM) {
+            if (possibleCenter.count >= FinderPatternFinder.CENTER_QUORUM) {
                 confirmedCount++;
                 totalModuleSize += possibleCenter.estimatedModuleSize;
             }
@@ -505,7 +525,7 @@ export default class FinderPatternFinder {
         }
         let firstConfirmedCenter: FinderPattern = null;
         this._possibleCenters.forEach((center: FinderPattern) => {
-            if (center.count >= CENTER_QUORUM) {
+            if (center.count >= FinderPatternFinder.CENTER_QUORUM) {
                 if (firstConfirmedCenter == null) {
                     firstConfirmedCenter = center;
                 } else {
@@ -529,7 +549,7 @@ export default class FinderPatternFinder {
      *
      * @param patterns array of three {@code ResultPoint} to order
      */
-    private static orderBestPatterns(patterns: FinderPattern[]): FinderPattern[] {
+    protected static orderBestPatterns(patterns: FinderPattern[]): FinderPattern[] {
 
         // Find distances between pattern centers
         const zeroOneDistance = distance(patterns[0], patterns[1]);
@@ -570,5 +590,14 @@ export default class FinderPatternFinder {
         patterns[2] = pointC;
 
         return [pointA, pointB, pointC]
+    }
+
+    /**
+     * @param pattern1 first pattern
+     * @param pattern2 second pattern
+     * @return distance between two points
+     */
+    protected static distance(pattern1: FinderPattern, pattern2: FinderPattern): number {
+        return Math.sqrt(Math.pow(pattern1.x - pattern2.x, 2) + Math.pow(pattern1.y - pattern2.y, 2));
     }
 }
