@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import {loadImage} from '../../util';
 
-import QRCodeMultiReader from "../../../src/multi/qrcode/QRCodeMultiReader";
+import MultiQRCodeReader from "../../../src/multi/qrcode/MultiQRCodeReader";
 
 const FILE_BASE_PATH = "http://localhost:9876/base/test/multi/qrcode/";
 const TestImages = [
@@ -16,7 +16,7 @@ const TestImages = [
 
 describe("MultiQRCodeReader", function () {
     describe("#decode()", function () {
-        const reader = new QRCodeMultiReader();
+        const reader = new MultiQRCodeReader();
 
         TestImages.forEach((testImageInfo) => {
             const {fileName, expectTexts} = testImageInfo;
