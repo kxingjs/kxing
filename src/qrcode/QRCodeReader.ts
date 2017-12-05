@@ -1,4 +1,4 @@
-import {Reader} from "../Reader";
+import Reader from "../Reader";
 import QRDecoder from "./decode/QRDecoder";
 import Result from "../Result";
 import QRDetector from "./detector/QRDetector";
