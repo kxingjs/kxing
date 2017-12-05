@@ -1,6 +1,6 @@
 import Result from "./Result";
 
-interface Reader {
+export interface Reader {
 
     /**
      * Locates and decodes a barcode in some format within an image.
@@ -13,5 +13,3 @@ interface Reader {
      */
     decode(image: ImageData): Result;
 }
-
-export default Reader;

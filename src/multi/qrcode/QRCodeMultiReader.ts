@@ -11,7 +11,7 @@ import BitMatrix from "../../common/BitMatrix";
  * @link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/multi/qrcode/QRCodeMultiReader.java
  * TODO: Support StructuredAppend.
  */
-class MultiQRCodeReader extends QRCodeReader implements MultipleBarcodeReader {
+class QRCodeMultiReader extends QRCodeReader implements MultipleBarcodeReader {
 
     /**
      * Decode multiple QRCodes.
@@ -38,4 +38,4 @@ class MultiQRCodeReader extends QRCodeReader implements MultipleBarcodeReader {
     }
 }
 
-export default MultiQRCodeReader;
+export default QRCodeMultiReader;
