@@ -10,8 +10,7 @@
     "build:es": "tsc --target es6 --outDir es",
     "build:umd": "webpack",
     "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
-    "test": "karma start",
-    "test:ci": "karma start --single-run --browsers PhantomJS",
+    "test": "karma start --single-run --browsers PhantomJS_custom",
     "prepublish": "npm run clean && npm run build"
   },
   "files": [
