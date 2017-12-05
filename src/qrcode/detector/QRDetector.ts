@@ -1,6 +1,6 @@
-import Version from '../format/Version';
-import AlignmentPatternFinder from './AlignmentPatternFinder';
-import FinderPatternFinder from './FinderPatternFinder';
+import Version from'../format/Version';
+import AlignmentPatternFinder from'./AlignmentPatternFinder';
+import FinderPatternFinder from'./FinderPatternFinder';
 import {FinderPatternFinderResult} from "./FinderPatternFinder";
 import AlignmentPattern from "../format/AlignmentPattern";
 import FinderPattern from "../format/FinderPattern";
@@ -17,9 +17,9 @@ import {binarize} from "../../common/Binarizer";
  * @author Tatsuya Yamamoto
  */
 export default class QRDetector {
-    protected _bits: number[];
-    protected _width: number;
-    protected _height: number;
+    private _bits: number[];
+    private _width: number;
+    private _height: number;
 
     constructor(canvasImageData: ImageData) {
         this._bits = binarize(canvasImageData).bits;
@@ -31,10 +31,6 @@ export default class QRDetector {
         const finderPatternFinder = new FinderPatternFinder(this._bits, this._width, this._height);
         const finderPatterns: FinderPatternFinderResult = finderPatternFinder.find();
 
-        return this.processFinderPatternInfo(finderPatterns);
-    };
-
-    protected processFinderPatternInfo(finderPatterns: FinderPatternFinderResult): BitMatrix {
         const topLeft = finderPatterns.topLeft;
         const topRight = finderPatterns.topRight;
         const bottomLeft = finderPatterns.bottomLeft;
@@ -79,7 +75,7 @@ export default class QRDetector {
 
         const sampler: GridSampler = new GridSampler(this._width, this._height);
         return sampler.sampleGrid(this._bits, dimension, dimension, transform);
-    }
+    };
 
     private static createTransform(topLeft: FinderPattern,
                                    topRight: FinderPattern,
@@ -170,9 +166,9 @@ export default class QRDetector {
                                 bottomLeft: FinderPattern): number {
         // Take the average
         return (
-            this.calculateModuleSizeOneWay(topLeft, topRight) +
-            this.calculateModuleSizeOneWay(topLeft, bottomLeft)
-        ) / 2.0;
+                this.calculateModuleSizeOneWay(topLeft, topRight) +
+                this.calculateModuleSizeOneWay(topLeft, bottomLeft)
+            ) / 2.0;
     };
 
     /**
