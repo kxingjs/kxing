@@ -2,11 +2,6 @@ import FinderPatternFinder, {FinderPatternFinderResult} from "../../../qrcode/de
 import FinderPattern from "../../../qrcode/format/FinderPattern";
 import NotFoundError from "../../../error/NotFoundError";
 
-/**
- * Attempts to find finder patterns in a QR Code.
- *
- * @link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/multi/qrcode/detector/MultiFinderPatternFinder.java
- */
 class MultiFinderPatternFinder extends FinderPatternFinder {
     // max. legal count of modules per QR code edge (177)
     protected static MAX_MODULE_COUNT_PER_EDGE = 180;
@@ -165,11 +160,6 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
         throw new NotFoundError("Nothing found.")
     }
 
-    /**
-     * Find multi QRCodes.
-     * 
-     * @return {FinderPatternFinderResult[]}
-     */
     public findMulti(): FinderPatternFinderResult[] {
         const imageHeigth = this.height;
         const imageWidth = this.width;
