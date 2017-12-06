@@ -1,5 +1,9 @@
 # KXing Change Log
 
+## v1.2
+
+- Port multi QRcode reading.
+
 ## v1.1.4
 
 - bug fix
