@@ -4,6 +4,8 @@
   "description": "ZXing, barcode image processing, porting/rewite library.",
   "main": "./dist/kxing.js",
   "jsnext:main": "./es/index.js",
+  "module": "./es/index.js",
+  "types": "./es/index.d.ts",
   "scripts": {
     "clean": "rimraf es dist",
     "build": "npm run clean && npm run build:es && npm run build:umd && npm run build:umd:min",
@@ -16,7 +18,10 @@
   "files": [
     "dist",
     "es",
-    "src"
+    "src",
+    "LICENSE",
+    "package.json",
+    "README.md"
   ],
   "repository": {
     "type": "git",
@@ -29,7 +34,7 @@
     "barcode"
   ],
   "author": "Tatsuya Yamamoto",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "@types/chai": "^3.4.35",
     "@types/mocha": "^2.2.40",
