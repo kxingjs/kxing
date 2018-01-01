@@ -15,6 +15,11 @@ export function getReader(): Reader {
     return new QRCodeReader();
 }
 
-export {default as Reader} from "./Reader";
-export {default as QRCodeReader} from "./qrcode/QRCodeReader";
-export {default as MultiQRCodeReader} from "./multi/qrcode/MultiQRCodeReader";
+export * from './Result';
+export * from './BarcodeFormat';
+
+export * from "./Reader";
+export * from "./qrcode/QRCodeReader";
+
+export * from "./multi/MultipleBarcodeReader";
+export * from "./multi/qrcode/MultiQRCodeReader";
