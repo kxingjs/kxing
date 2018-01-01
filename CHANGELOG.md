@@ -1,5 +1,10 @@
 # KXing Change Log
 
+## v1.2.1
+
+- Public some core classes.
+- edit entry point path in package.json
+
 ## v1.2
 
 - Port multi QRcode reading.
