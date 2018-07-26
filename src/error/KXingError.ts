@@ -4,16 +4,16 @@
  * {@link https://stackoverflow.com/questions/1382107/whats-a-good-way-to-extend-error-in-javascript}
  */
 abstract class KXingError {
-    public name: string;
-    public message: string;
-    public stack?;
+  public name: string;
+  public message: string;
+  public stack?;
 
-    constructor(name, message) {
-        this.name = name;
-        this.message = message;
-        this.stack = (new Error()).stack;
-    }
+  constructor(name, message) {
+    this.name = name;
+    this.message = message;
+    this.stack = new Error().stack;
+  }
 }
 
-KXingError.prototype = new Error;
+KXingError.prototype = new Error();
 export default KXingError;

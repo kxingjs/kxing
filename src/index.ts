@@ -12,11 +12,11 @@ import QRCodeReader from "./qrcode/QRCodeReader";
  * @deprecated
  */
 export function getReader(): Reader {
-    return new QRCodeReader();
+  return new QRCodeReader();
 }
 
-export * from './Result';
-export * from './BarcodeFormat';
+export * from "./Result";
+export * from "./BarcodeFormat";
 
 export * from "./Reader";
 export * from "./qrcode/QRCodeReader";
