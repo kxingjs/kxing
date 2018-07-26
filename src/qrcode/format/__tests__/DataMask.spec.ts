@@ -9,8 +9,8 @@ import {
   DataMask111,
   DataMask101,
   DataMask110
-} from "../../../src/qrcode/format/DataMask";
-import BitMatrix from "../../../src/common/BitMatrix";
+} from "../DataMask";
+import BitMatrix from "../../../common/BitMatrix";
 
 describe("DataMask", function() {
   describe("DataMask000", function() {

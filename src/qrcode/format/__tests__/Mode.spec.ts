@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import Version from "../../../src/qrcode/format/Version";
-import IllegalArgumentError from "../../../src/error/IllegalArgumentError";
+import Version from "../Version";
+import IllegalArgumentError from "../../../error/IllegalArgumentError";
 import {
   forBits,
   TerminatorMode,
@@ -8,7 +8,7 @@ import {
   AlphaNumericMode,
   ByteMode,
   KanjiMode
-} from "../../../src/qrcode/format/Mode";
+} from "../Mode";
 
 describe("Mode", function() {
   describe("testForBits", function() {

@@ -1,7 +1,7 @@
 import { assert } from "chai";
-import { loadImage } from "../../util";
+import { loadImage } from "../util";
 
-import MultiQRCodeReader from "../../../src/multi/qrcode/MultiQRCodeReader";
+import MultiQRCodeReader from "../../src/multi/qrcode/MultiQRCodeReader";
 
 const FILE_BASE_PATH = "http://localhost:9876/base/test/multi/qrcode/";
 const TestImages = [

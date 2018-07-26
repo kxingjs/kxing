@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { arraycopy } from "../../src/common/Utils";
+import { arraycopy } from "../Utils";
 
 describe("Utils", () => {
   describe("#arraycopy()", () => {

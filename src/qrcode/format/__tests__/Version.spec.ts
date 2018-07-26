@@ -1,12 +1,7 @@
 import { expect } from "chai";
-import Version from "../../../src/qrcode/format/Version";
-import {
-  LevelH,
-  LevelQ,
-  LevelM,
-  LevelL
-} from "../../../src/qrcode/format/ErrorCorrectionLevel";
-import IllegalArgumentError from "../../../src/error/IllegalArgumentError";
+import Version from "../Version";
+import { LevelH, LevelQ, LevelM, LevelL } from "../ErrorCorrectionLevel";
+import IllegalArgumentError from "../../../error/IllegalArgumentError";
 
 describe("Version", function() {
   describe("version for number", function() {

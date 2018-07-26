@@ -1,7 +1,7 @@
 import { expect } from "chai";
-import FormatInformation from "../../../src/qrcode/format/FormatInformation";
-import { LevelQ } from "../../../src/qrcode/format/ErrorCorrectionLevel";
-import { DataMask } from "../../../src/qrcode/format/DataMask";
+import FormatInformation from "../FormatInformation";
+import { LevelQ } from "../ErrorCorrectionLevel";
+import { DataMask } from "../DataMask";
 
 describe("FormatInformation", function() {
   describe("numBitsDiffering", function() {

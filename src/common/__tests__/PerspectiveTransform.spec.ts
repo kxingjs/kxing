@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import PerspectiveTransform from "../../src/common/PerspectiveTransform";
+import PerspectiveTransform from "../PerspectiveTransform";
 
 const EPSILON: number = 0.0001;
 
