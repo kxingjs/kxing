@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { arraycopy } from "../Utils";
 
 describe("Utils", () => {
@@ -11,7 +10,7 @@ describe("Utils", () => {
       arraycopy(src, 0, dest, 0, 5);
 
       dest.forEach(function(value, index) {
-        expect(value).to.be.equal(expectDest[index]);
+        expect(value).toEqual(expectDest[index]);
       });
     });
 
@@ -23,7 +22,7 @@ describe("Utils", () => {
       arraycopy(src, 3, dest, 2, 4);
 
       dest.forEach(function(value, index) {
-        expect(value).to.be.equal(expectDest[index]);
+        expect(value).toEqual(expectDest[index]);
       });
     });
   });

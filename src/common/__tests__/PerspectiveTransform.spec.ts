@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import PerspectiveTransform from "../PerspectiveTransform";
 
 const EPSILON: number = 0.0001;
@@ -85,6 +84,6 @@ function assertPointEquals(
   const points: number[] = [sourceX, sourceY];
   pt.transformPoints(points);
 
-  expect(expectedX).to.closeTo(points[0], EPSILON);
-  expect(expectedY).to.closeTo(points[1], EPSILON);
+  expect(expectedX).toBeCloseTo(points[0], EPSILON);
+  expect(expectedY).toBeCloseTo(points[1], EPSILON);
 }

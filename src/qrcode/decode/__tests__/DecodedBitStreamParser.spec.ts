@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import DecodedBitStreamParser from "../DecodedBitStreamParser";
 import Version from "../../format/Version";
 import DecoderResult from "../../../common/DecoderResult";
@@ -17,7 +16,7 @@ describe("DecodedBitStreamParser", function() {
         Version.getVersionForNumber(1),
         null
       );
-      expect("\u00f1\u00f2\u00f3").to.be.equal(result.text);
+      expect("\u00f1\u00f2\u00f3").toEqual(result.text);
     });
   });
 });

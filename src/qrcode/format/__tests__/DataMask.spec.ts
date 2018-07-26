@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import {
   DataMask,
   DataMask000,
@@ -111,7 +110,7 @@ function testMaskAcrossDimensions(mask: DataMask, condition: any): void {
     mask.unmaskBitMatrix(bits, dimension);
     for (let i = 0; i < dimension; i++) {
       for (let j = 0; j < dimension; j++) {
-        expect(condition.isMasked(i, j)).to.be.equal(bits.getBit(j, i));
+        expect(condition.isMasked(i, j)).toEqual(bits.getBit(j, i));
       }
     }
   }

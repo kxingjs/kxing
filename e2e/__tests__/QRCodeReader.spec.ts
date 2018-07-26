@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { loadImage } from "../util";
 
 import QRCodeReader from "../../src/qrcode/QRCodeReader";
@@ -29,7 +28,7 @@ describe("QRCodeReader", function() {
 
         loadImage(path, image => {
           const result = reader.decode(image);
-          expect(expectText).to.equal(result.text);
+          expect(expectText).toEqual(result.text);
           done();
         });
       });

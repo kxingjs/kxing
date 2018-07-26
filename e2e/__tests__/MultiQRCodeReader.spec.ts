@@ -1,4 +1,3 @@
-import { assert } from "chai";
 import { loadImage } from "../util";
 
 import MultiQRCodeReader from "../../src/multi/qrcode/MultiQRCodeReader";
@@ -25,7 +24,7 @@ describe("MultiQRCodeReader", function() {
           const results = reader.decodeMultiple(image);
           const actualTexts = results.map(result => result.text);
 
-          assert.sameMembers(expectTexts, actualTexts);
+          expect(expectTexts).toEqual(actualTexts);
           done();
         });
       });
