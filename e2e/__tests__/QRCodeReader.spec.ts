@@ -1,8 +1,8 @@
 import { loadImage } from "../util";
 
-import QRCodeReader from "../../src/qrcode/QRCodeReader";
+const KXing = require("../../dist/kxing.js");
 
-const FILE_BASE_PATH = "http://localhost:9876/base/test/qrcode/";
+const FILE_BASE_PATH = __dirname;
 const TestImages = [
   {
     mode: "NumericOnly",
@@ -18,19 +18,18 @@ const TestImages = [
 
 describe("QRCodeReader", function() {
   describe("#decode()", function() {
-    const reader = new QRCodeReader();
+    const reader = KXing.getReader();
 
     TestImages.forEach(testImageInfo => {
       const { mode, fileName, expectText } = testImageInfo;
 
-      it(`should return expected result text with ${mode} mode image.`, function(done) {
-        const path = `${FILE_BASE_PATH}${fileName}`;
+      it(`should return expected result text with ${mode} mode image.`, async () => {
+        const path = `${FILE_BASE_PATH}/${fileName}`;
 
-        loadImage(path, image => {
-          const result = reader.decode(image);
-          expect(expectText).toEqual(result.text);
-          done();
-        });
+        const image = await loadImage(path);
+
+        const result = reader.decode(image);
+        expect(expectText).toEqual(result.text);
       });
     });
   });

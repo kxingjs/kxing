@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "es2015"
-    ],
+    "lib": ["dom", "es2015"],
     "target": "es5",
     "module": "es6",
     "noUnusedLocals": true,
@@ -11,7 +8,5 @@
     "sourceMap": true,
     "inlineSources": true
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*.ts"]
 }

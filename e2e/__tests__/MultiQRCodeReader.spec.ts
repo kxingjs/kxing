@@ -1,8 +1,9 @@
 import { loadImage } from "../util";
 
-import MultiQRCodeReader from "../../src/multi/qrcode/MultiQRCodeReader";
+const KXing = require("../../dist/kxing.js");
 
-const FILE_BASE_PATH = "http://localhost:9876/base/test/multi/qrcode/";
+const FILE_BASE_PATH = __dirname;
+
 const TestImages = [
   {
     fileName: "testcode.multi.png",
@@ -12,21 +13,19 @@ const TestImages = [
 
 describe("MultiQRCodeReader", function() {
   describe("#decode()", function() {
-    const reader = new MultiQRCodeReader();
+    const reader = KXing.getMultiReader();
 
     TestImages.forEach(testImageInfo => {
       const { fileName, expectTexts } = testImageInfo;
 
-      it(`should return expected multiple results.`, done => {
-        const path = `${FILE_BASE_PATH}${fileName}`;
+      it(`should return expected multiple results.`, async () => {
+        const path = `${FILE_BASE_PATH}/${fileName}`;
 
-        loadImage(path, image => {
-          const results = reader.decodeMultiple(image);
-          const actualTexts = results.map(result => result.text);
+        const image = await loadImage(path);
+        const results = reader.decodeMultiple(image);
 
-          expect(expectTexts).toEqual(actualTexts);
-          done();
-        });
+        const actualTexts = results.map(result => result.text);
+        expect(expectTexts.sort()).toEqual(actualTexts.sort());
       });
     });
   });
