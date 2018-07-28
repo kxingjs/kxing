@@ -1,7 +1,7 @@
 import QRCodeReader from "../../qrcode/QRCodeReader";
 import MultipleBarcodeReader from "../MultipleBarcodeReader";
 import Result from "../../Result";
-import { BarcodeFormat } from "../../BarcodeFormat";
+import BarcodeFormat from "../../BarcodeFormat";
 import MultiDetector from "./detector/MultiDetector";
 import BitMatrix from "../../common/BitMatrix";
 

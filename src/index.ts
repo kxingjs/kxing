@@ -26,11 +26,13 @@ export function getMultiReader(): MultipleBarcodeReader {
   return new MultiQRCodeReader();
 }
 
-export * from "./Result";
-export * from "./BarcodeFormat";
+export { default as Result } from "./Result";
+export { default as BarcodeFormat } from "./BarcodeFormat";
 
-export * from "./Reader";
-export * from "./qrcode/QRCodeReader";
+export { default as Reader } from "./Reader";
+export { default as QRCodeReader } from "./qrcode/QRCodeReader";
 
-export * from "./multi/MultipleBarcodeReader";
-export * from "./multi/qrcode/MultiQRCodeReader";
+export {
+  default as MultipleBarcodeReader
+} from "./multi/MultipleBarcodeReader";
+export { default as MultiQRCodeReader } from "./multi/qrcode/MultiQRCodeReader";

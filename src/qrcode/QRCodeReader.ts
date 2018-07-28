@@ -3,7 +3,7 @@ import QRDecoder from "./decode/QRDecoder";
 import Result from "../Result";
 import QRDetector from "./detector/QRDetector";
 import BitMatrix from "../common/BitMatrix";
-import { BarcodeFormat } from "../BarcodeFormat";
+import BarcodeFormat from "../BarcodeFormat";
 import DecoderResult from "../common/DecoderResult";
 
 export default class QRCodeReader implements Reader {

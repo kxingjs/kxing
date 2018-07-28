@@ -1,4 +1,4 @@
-import { BarcodeFormat } from "./BarcodeFormat";
+import BarcodeFormat from "./BarcodeFormat";
 
 export default class Result {
   private _text: string;
