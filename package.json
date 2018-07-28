@@ -12,9 +12,10 @@
     "build:umd": "rollup -c -f umd -o dist/index.js",
     "build:es": "rollup -c -f es -o dist/index.es.js",
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
-    "test": "npm run test:ut",
-    "test:ut": "jest",
-    "format": "prettier --write '{src,test}/**/*.ts'",
+    "test": "jest",
+    "test:ut": "jest src",
+    "test:e2e": "jest e2e",
+    "format": "prettier --write '{src,e2e}/**/*.ts'",
     "precommit": "pretty-quick --staged"
   },
   "files": [
