@@ -1,6 +1,6 @@
 import { loadImage } from "../util";
 
-const KXing = require("../../dist/kxing.js");
+const KXing = require("../../dist/index.js");
 
 const FILE_BASE_PATH = __dirname;
 

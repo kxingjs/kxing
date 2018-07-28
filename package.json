@@ -2,26 +2,23 @@
   "name": "kxing",
   "version": "1.1.4",
   "description": "ZXing, barcode image processing, porting/rewite library.",
-  "main": "./dist/kxing.js",
-  "jsnext:main": "./es/index.js",
-  "module": "./es/index.js",
-  "types": "./es/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf es dist",
-    "build": "npm run clean && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "build:es": "tsc --target es6 --outDir es --declaration",
-    "build:umd": "webpack",
-    "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "npm run build:umd && npm run build:es && npm run build:types",
+    "build:umd": "rollup -c -f umd -o dist/index.js",
+    "build:es": "rollup -c -f es -o dist/index.es.js",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "test": "npm run test:ut",
     "test:ut": "jest",
-    "prepublish": "npm run clean && npm run build",
     "format": "prettier --write '{src,test}/**/*.ts'",
     "precommit": "pretty-quick --staged"
   },
   "files": [
     "dist",
-    "es",
-    "src",
     "LICENSE",
     "package.json",
     "README.md"
@@ -61,9 +58,11 @@
     "prettier": "1.13.7",
     "pretty-quick": "^1.6.0",
     "rimraf": "^2.6.1",
+    "rollup": "^0.63.4",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-uglify": "^4.0.0",
     "ts-jest": "^23.0.1",
-    "ts-loader": "^2.0.3",
     "typescript": "^2.2.2",
-    "webpack": "^2.3.2"
+    "uglify-es": "^3.3.9"
   }
 }
