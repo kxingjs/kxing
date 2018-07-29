@@ -36,3 +36,5 @@ export {
   default as MultipleBarcodeReader
 } from "./multi/MultipleBarcodeReader";
 export { default as MultiQRCodeReader } from "./multi/qrcode/MultiQRCodeReader";
+
+export { default as ImageLoader } from "./ImageLoader";

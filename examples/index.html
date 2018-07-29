@@ -8,7 +8,7 @@
 <h1>KXing! (・８・)</h1>
 
 <h2>TARGET CODE</h2>
-<img id="qrcode"/>
+<img id="qrcode" src="./code.png"/>
 
 <h2>RESULT</h2>
 
@@ -26,7 +26,26 @@
 </dl>
 
 
-<script src="./node_modules/kxing/dist/kxing.js"></script>
-<script src="./index.js"></script>
+<script src="./node_modules/kxing/dist/index.js"></script>
+<script >
+  const filePath = "./code.png";
+
+  KXing.ImageLoader.load(filePath).then(imageData => {
+    try {
+      const result = KXing.getReader().decode(imageData);
+      setResult(result);
+    } catch (e) {
+      console.error("fail to decode.", e);
+    }
+  });
+
+  function setResult(result) {
+    text.innerHTML = result.text;
+    rawBytes.innerHTML = result.rawBytes;
+    numBits.innerHTML = result.numBits;
+    barcodeFormat.innerHTML = result.barcodeFormat;
+    timestamp.innerHTML = result.timestamp;
+  }
+</script>
 </body>
 </html>
