@@ -1,6 +1,6 @@
-export enum BarcodeFormat {
-
+enum BarcodeFormat {
   /** QR Code 2D barcode format. */
-  QR_CODE = "qr_code",
-
+  QR_CODE = "qr_code"
 }
+
+export default BarcodeFormat;

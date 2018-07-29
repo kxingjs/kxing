@@ -9,29 +9,31 @@ import BitMatrix from "../../../common/BitMatrix";
  * @see https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/multi/qrcode/detector/MultiDetector.java
  */
 class MultiDetector extends QRDetector {
+  /**
+   * Detects multi QRCodes from image.
+   *
+   * @return {BitMatrix[]}
+   * TODO: replace return value to DetectorResult class.
+   */
+  public detectMulti(): BitMatrix[] {
+    const finderPatternFinder = new MultiFinderPatternFinder(
+      this._bits,
+      this._width,
+      this._height
+    );
+    const finderPatterns = finderPatternFinder.findMulti();
 
-    /**
-     * Detects multi QRCodes from image.
-     *
-     * @return {BitMatrix[]}
-     * TODO: replace return value to DetectorResult class.
-     */
-    public detectMulti(): BitMatrix[] {
+    const results: BitMatrix[] = [];
+    finderPatterns.forEach(pattern => {
+      try {
+        results.push(this.processFinderPatternInfo(pattern));
+      } catch (e) {
+        // ignore
+      }
+    });
 
-        const finderPatternFinder = new MultiFinderPatternFinder(this._bits, this._width, this._height);
-        const finderPatterns = finderPatternFinder.findMulti();
-
-        const results: BitMatrix[] = [];
-        finderPatterns.forEach((pattern) => {
-            try {
-                results.push(this.processFinderPatternInfo(pattern));
-            } catch (e) {
-                // ignore
-            }
-        });
-
-        return results;
-    }
+    return results;
+  }
 }
 
 export default MultiDetector;

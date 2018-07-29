@@ -2,23 +2,24 @@
   "name": "kxing",
   "version": "1.2.1",
   "description": "ZXing, barcode image processing, porting/rewite library.",
-  "main": "./dist/kxing.js",
-  "jsnext:main": "./es/index.js",
-  "module": "./es/index.js",
-  "types": "./es/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf es dist",
-    "build": "npm run clean && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "build:es": "tsc --target es6 --outDir es --declaration",
-    "build:umd": "webpack",
-    "build:umd:min": "webpack --optimize-minimize --output-filename kxing.min.js",
-    "test": "karma start --single-run --browsers PhantomJS_custom",
-    "prepublish": "npm run clean && npm run build"
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build": "npm run build:umd && npm run build:es && npm run build:types",
+    "build:umd": "rollup -c -f umd -o dist/index.js",
+    "build:es": "rollup -c -f es -o dist/index.es.js",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "test": "jest",
+    "test:ut": "jest src",
+    "test:e2e": "jest e2e",
+    "format": "prettier --write '{src,e2e}/**/*.ts'",
+    "precommit": "pretty-quick --staged"
   },
   "files": [
     "dist",
-    "es",
-    "src",
     "LICENSE",
     "package.json",
     "README.md"
@@ -35,18 +36,34 @@
   ],
   "author": "Tatsuya Yamamoto",
   "license": "MIT",
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(src|e2e).*(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "devDependencies": {
-    "@types/chai": "^3.4.35",
-    "@types/mocha": "^2.2.40",
-    "chai": "^3.5.0",
-    "karma": "^1.5.0",
-    "karma-mocha": "^1.3.0",
-    "karma-phantomjs-launcher": "^1.0.4",
-    "karma-webpack": "^2.0.3",
-    "mocha": "^3.2.0",
+    "@types/jest": "^23.3.0",
+    "@types/node": "^10.5.3",
+    "canvas": "^1.6.11",
+    "husky": "^0.14.3",
+    "jest": "^23.4.1",
+    "prettier": "1.13.7",
+    "pretty-quick": "^1.6.0",
     "rimraf": "^2.6.1",
-    "ts-loader": "^2.0.3",
+    "rollup": "^0.63.4",
+    "rollup-plugin-typescript2": "^0.16.1",
+    "rollup-plugin-uglify": "^4.0.0",
+    "ts-jest": "^23.0.1",
     "typescript": "^2.2.2",
-    "webpack": "^2.3.2"
+    "uglify-es": "^3.3.9"
   }
 }

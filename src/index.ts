@@ -3,23 +3,38 @@
  */
 import Reader from "./Reader";
 import QRCodeReader from "./qrcode/QRCodeReader";
+import MultipleBarcodeReader from "./multi/MultipleBarcodeReader";
+import MultiQRCodeReader from "./multi/qrcode/MultiQRCodeReader";
 
 /**
- * Get {@code QRCodeReader} instance.
+ * Get {@code Reader} instance.
  *
  * @return {Reader}
  * @see QRCodeReader
- * @deprecated
  */
 export function getReader(): Reader {
-    return new QRCodeReader();
+  return new QRCodeReader();
 }
 
-export * from './Result';
-export * from './BarcodeFormat';
+/**
+ * Get {@code MultipleBarcodeReader} instance.
+ *
+ * @return {MultipleBarcodeReader}
+ * @see MultiQRCodeReader
+ */
+export function getMultiReader(): MultipleBarcodeReader {
+  return new MultiQRCodeReader();
+}
 
-export * from "./Reader";
-export * from "./qrcode/QRCodeReader";
+export { default as Result } from "./Result";
+export { default as BarcodeFormat } from "./BarcodeFormat";
 
-export * from "./multi/MultipleBarcodeReader";
-export * from "./multi/qrcode/MultiQRCodeReader";
+export { default as Reader } from "./Reader";
+export { default as QRCodeReader } from "./qrcode/QRCodeReader";
+
+export {
+  default as MultipleBarcodeReader
+} from "./multi/MultipleBarcodeReader";
+export { default as MultiQRCodeReader } from "./multi/qrcode/MultiQRCodeReader";
+
+export { default as ImageLoader } from "./ImageLoader";
