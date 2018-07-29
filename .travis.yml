@@ -6,5 +6,10 @@ sudo: false
 cache:
   directories:
     - node_modules
+before_install:
+  #  for node-canvas
+  - sudo apt-get install libcairo2-dev libjpeg-dev libpango1.0-dev libgif-dev build-essential g++
 script:
-  - npm run test
+  - yarn test:ut
+  - yarn build
+  - yarn test:e2e
