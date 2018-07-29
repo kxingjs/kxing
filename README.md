@@ -14,28 +14,30 @@ You can install via [npm](https://www.npmjs.com/package/kxing).
 
 ```
 $ npm install --save kxing
+// or yarn
 ```
 
 ## Usage
-
-```
-your_project/
-  └ node_modules/
-    └ kxing/
-      ├ dist/
-      │  ├ kxing.js         <- UMD (Universal Module Definition).
-      │  └ kxing.min.js     <- minified UMD.
-      └ es/                 <- es6 module.
-```
 
 ### Browsers
 
 You can use it within the browser. Found UMD KXing file within node_modules.
 
 ```html
-<script src="./node_modules/kxing/dist/kxing.js"></script>
+<!--Load UMD-->
+<script src="./node_modules/kxing/dist/index.js"></script>
 <script>
-    var result = KXing.getReader().decode(imageData);
+    // Load a pixel data
+    KXing.ImageLoader.load(filePath).then(imageData => {
+        try {
+            // Get reader
+            const reader = KXing.getReader();
+            // Decode QRCode image.
+            const result = reader.decode(imageData);
+        } catch (e) {
+            console.error("fail to decode.", e);
+        }
+    });
 </script>
 ```
 
@@ -44,8 +46,19 @@ You can use it within the browser. Found UMD KXing file within node_modules.
 If you use bundler, import as ES6 module.
 
 ```js
-import { getReader } from "kxing";
-const result = getReader().decode(imageData);
+import { getReader, ImageLoader } from "kxing";
+
+// Load a pixel data
+ImageLoader.load(filePath).then(imageData => {
+  try {
+    // Get reader
+    const reader = KXing.getReader();
+    // Decode QRCode image.
+    const result = reader.decode(imageData);
+  } catch (e) {
+    console.error("fail to decode.", e);
+  }
+});
 ```
 
 ## API
@@ -67,3 +80,17 @@ Current version can provide [QRCodeReader](https://github.com/kxingjs/kxing/blob
 - `imageData` is [ImageData](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) instance, pixel data of an area of a canvas element. You can get it from [CanvasRenderingContext2D.getImageData()](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData).
 - `decode()` provide `result` that has some values: - text: Decoded string. - rawBytes: Raw bytes encoded by the barcode - numBits: Number of valid bits. - barcodeFormat - timestamp
 - In case to fail decode, throw Error: (e.g.: NotFoundError, FormatError).
+
+### `multiReader = getMultiReader()`
+
+**_Getter that KXing [MultipleBarcodeReader](https://github.com/kxingjs/kxing/blob/master/src/multi/MultipleBarcodeReader.ts) instance._**
+
+- The instance can be reused.
+
+#### Important notes
+
+Current version can provide [MultiQRCodeReader](https://github.com/kxingjs/kxing/blob/master/src/multi/qrcode/MultiQRCodeReader.ts) only.
+
+### `results = multiReader.decodeMultiple(imageData)`
+
+**_Decode a barcode images and return results._**
