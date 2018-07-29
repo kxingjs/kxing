@@ -1,5 +1,10 @@
 # KXing Change Log
 
+## v1.2.2
+
+- bug fix
+  - cannot import some class or functions.
+
 ## v1.2.1
 
 - Public some core classes.
@@ -16,22 +21,19 @@
 ## v1.1.3
 
 - support [jsnext:main](https://github.com/jsforum/jsforum/issues/5).
-	
+
 ## v1.1.2
 
-- bug fix
-	- can't binarize a color image.
+- bug fix - can't binarize a color image.
 
 ## v1.1.1
 
 - add sample application.
 - edit README for installation and usage.
 
-
 ## v1.1.0
 
-- bug fix
-	- can't decode some Alphanumeric chars.
+- bug fix - can't decode some Alphanumeric chars.
 
 ## v1.0.0
 
