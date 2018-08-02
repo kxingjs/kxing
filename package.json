@@ -14,7 +14,7 @@
     "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
     "test": "jest",
     "test:ut": "jest src",
-    "test:e2e": "jest e2e",
+    "test:e2e": "karma start e2e/karma.conf.js",
     "format": "prettier --write '{src,e2e}/**/*.ts'",
     "precommit": "pretty-quick --staged"
   },
@@ -40,7 +40,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(src|e2e).*(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "src.*(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -53,9 +53,12 @@
   "devDependencies": {
     "@types/jest": "^23.3.0",
     "@types/node": "^10.5.3",
-    "canvas": "^1.6.11",
     "husky": "^0.14.3",
+    "jasmine-core": "^3.1.0",
     "jest": "^23.4.1",
+    "karma": "^2.0.5",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.2",
     "prettier": "1.13.7",
     "pretty-quick": "^1.6.0",
     "rimraf": "^2.6.1",
