@@ -1,62 +1,105 @@
-const PROXIED_BASE_URL = "http://localhost:9876/base";
+const PROXIED_BASE_URL = "http://localhost:9876/base/images/";
 
-const TEST_IMAGES = {
-  single: [
-    {
-      mode: "NumericOnly",
-      filePath: "/images/testcode.num.png",
-      expectText: "1029384756"
-    },
-    {
-      mode: "Alphanumeric",
-      filePath: "/images/testcode.alpha.png",
-      expectText: "1234567890 %*+-./:QWERTYUIOP"
-    }
-  ],
+const tryHarderHint = new Map([[KXing.DecodeHint.TRY_HARDER, true]]);
+
+const textCases = {
+  single: {
+    NumericOnly: [
+      {
+        fileName: "qrcode-num-single.png",
+        expectedText: "1029384756",
+        description: "should decode numeric only single QRCode."
+      },
+      {
+        fileName: "qrcode-num-single-rotate.png",
+        expectedText: "1029384756",
+        description: "should decode rotated numeric only QRCode."
+      },
+      {
+        fileName: "qrcode-num-single-large-margin.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode in large margin image.",
+        hints: tryHarderHint
+      }
+    ],
+    Alphanumeric: [
+      {
+        fileName: "qrcode-alpha-single.png",
+        expectedText: "1234567890 %\\*+-./:QWERTYUIOP",
+        description: "should decode single QRCode."
+      },
+      {
+        fileName: "qrcode-alpha-single-rotate.png",
+        expectedText: "1234567890 %\\*+-./:QWERTYUIOP",
+        description: "should decode rotated alphanumeric QRCode."
+      }
+    ]
+  },
   multi: [
     {
-      filePath: "/images/testcode.multi.png",
-      expectTexts: ["1029384756", "1234567890 %*+-./:QWERTYUIOP"]
+      fileName: "qrcode-multi.png",
+      expectedTexts: ["1234567890 %\\*+-./:QWERTYUIOP", "1029384756"],
+      description: "should decode multi QRCodes"
+    },
+    {
+      fileName: "qrcode-multi-large-margin.png",
+      expectedTexts: ["1234567890 %\\*+-./:QWERTYUIOP", "1029384756"],
+      description: "should decode multi QRCodes in image having large margin",
+      hints: tryHarderHint
     }
   ]
 };
 
 describe("QRCode", function() {
-  describe("QRCodeReader", function() {
-    describe("#decode()", function() {
+  describe("QRCodeReader#decode", function() {
+    describe("Numeric only mode", function() {
       const reader = KXing.getReader();
 
-      TEST_IMAGES.single.forEach(testImageInfo => {
-        const { mode, filePath, expectText } = testImageInfo;
+      textCases.single.NumericOnly.forEach(textCase => {
+        const { description, fileName, hints, expectedText } = textCase;
+        const path = `${PROXIED_BASE_URL}${fileName}`;
 
-        it(`should return expected result text with ${mode} mode image.`, async () => {
-          const path = `${PROXIED_BASE_URL}${filePath}`;
-
+        it(description, async () => {
           const image = await KXing.ImageLoader.load(path);
+          const result = reader.decode(image, hints);
 
-          const result = reader.decode(image);
-          expect(expectText).toEqual(result.text);
+          expect(result.text).toEqual(expectedText);
+        });
+      });
+    });
+
+    describe("Alphanumeric mode", function() {
+      const reader = KXing.getReader();
+
+      textCases.single.Alphanumeric.forEach(textCase => {
+        const { description, fileName, hints, expectedText } = textCase;
+        const path = `${PROXIED_BASE_URL}${fileName}`;
+
+        it(description, async () => {
+          const image = await KXing.ImageLoader.load(path);
+          const result = reader.decode(image, hints);
+
+          expect(result.text).toEqual(expectedText);
         });
       });
     });
   });
 
-  describe("MultiQRCodeReader", function() {
-    describe("#decode()", function() {
-      const reader = KXing.getMultiReader();
+  describe("MultiQRCodeReader#decodeMultiple", function() {
+    const reader = KXing.getMultiReader();
 
-      TEST_IMAGES.multi.forEach(testImageInfo => {
-        const { filePath, expectTexts } = testImageInfo;
+    textCases.multi.forEach(textCase => {
+      const { description, fileName, hints, expectedTexts } = textCase;
+      const path = `${PROXIED_BASE_URL}${fileName}`;
 
-        it(`should return expected multiple results.`, async () => {
-          const path = `${PROXIED_BASE_URL}${filePath}`;
+      it(description, async () => {
+        const path = `${PROXIED_BASE_URL}${fileName}`;
 
-          const image = await KXing.ImageLoader.load(path);
-          const results = reader.decodeMultiple(image);
+        const image = await KXing.ImageLoader.load(path);
+        const results = reader.decodeMultiple(image, hints);
+        const resultTexts = results.map(r => r.text);
 
-          const actualTexts = results.map(result => result.text);
-          expect(expectTexts.sort()).toEqual(actualTexts.sort());
-        });
+        expect(resultTexts).toEqual(expectedTexts);
       });
     });
   });
