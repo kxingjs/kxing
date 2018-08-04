@@ -10,6 +10,7 @@ import PerspectiveTransform from "../../common/PerspectiveTransform";
 import GridSampler from "../../common/GridSampler";
 import { distance, round } from "../../common/Utils";
 import { binarize } from "../../common/Binarizer";
+import DecodeHint from "../../DecodeHint";
 
 /*
  * Porting from {@link https://github.com/zxing/zxing/blob/master/core/src/main/java/com/google/zxing/qrcode/detector/Detector.java}
@@ -27,13 +28,15 @@ export default class QRDetector {
     this._height = canvasImageData.height;
   }
 
-  detect(): BitMatrix {
+  detect(hints?: Map<DecodeHint, any>): BitMatrix {
     const finderPatternFinder = new FinderPatternFinder(
       this._bits,
       this._width,
       this._height
     );
-    const finderPatterns: FinderPatternFinderResult = finderPatternFinder.find();
+    const finderPatterns: FinderPatternFinderResult = finderPatternFinder.find(
+      hints
+    );
 
     return this.processFinderPatternInfo(finderPatterns);
   }

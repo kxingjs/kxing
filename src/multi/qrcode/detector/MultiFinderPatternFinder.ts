@@ -2,6 +2,7 @@ import FinderPatternFinder, {
   FinderPatternFinderResult
 } from "../../../qrcode/detector/FinderPatternFinder";
 import FinderPattern from "../../../qrcode/format/FinderPattern";
+import DecodeHint from "../../../DecodeHint";
 
 /**
  * Attempts to find finder patterns in a QR Code.
@@ -189,9 +190,10 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
    *
    * @return {FinderPatternFinderResult[]}
    */
-  public findMulti(): FinderPatternFinderResult[] {
+  public findMulti(hints?: Map<DecodeHint, any>): FinderPatternFinderResult[] {
     const imageHeigth = this.height;
     const imageWidth = this.width;
+    const tryHarder = hints && hints.has(DecodeHint.TRY_HARDER);
 
     const { MAX_MODULES, MIN_SKIP } = FinderPatternFinder;
 
@@ -203,7 +205,7 @@ class MultiFinderPatternFinder extends FinderPatternFinder {
     // number of pixels the center could be, so skip this often. When trying harder, look for all
     // QR versions regardless of how dense they are.
     let iSkip = Math.floor(imageHeigth * 0.25 * (1 / MAX_MODULES) * 3);
-    if (iSkip < MIN_SKIP) {
+    if (iSkip < MIN_SKIP || tryHarder) {
       iSkip = MIN_SKIP;
     }
 

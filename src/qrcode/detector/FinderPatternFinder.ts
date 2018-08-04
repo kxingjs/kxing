@@ -1,6 +1,7 @@
 import FinderPattern from "../format/FinderPattern";
 import { distance, crossProductZ } from "../../common/Utils";
 import NotFoundError from "../../error/NotFoundError";
+import DecodeHint from "../../DecodeHint";
 
 export class FinderPatternFinderResult {
   private _topLeft: FinderPattern;
@@ -72,15 +73,16 @@ export default class FinderPatternFinder {
     return this._hasSkipped;
   }
 
-  public find(): FinderPatternFinderResult {
+  public find(hints?: Map<DecodeHint, any>): FinderPatternFinderResult {
     const imageHeigth = this._height;
     const imageWidth = this._width;
+    const tryHarder = hints && hints.has(DecodeHint.TRY_HARDER);
 
     let iSkip: number = Math.floor(
       imageHeigth * 0.25 * (1 / FinderPatternFinder.MAX_MODULES) * 3
     );
 
-    if (iSkip < FinderPatternFinder.MIN_SKIP) {
+    if (iSkip < FinderPatternFinder.MIN_SKIP || tryHarder) {
       iSkip = FinderPatternFinder.MIN_SKIP;
     }
 

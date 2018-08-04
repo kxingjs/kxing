@@ -1,6 +1,7 @@
 import QRDetector from "../../../qrcode/detector/QRDetector";
 import MultiFinderPatternFinder from "./MultiFinderPatternFinder";
 import BitMatrix from "../../../common/BitMatrix";
+import DecodeHint from "../../../DecodeHint";
 
 /**
  * <p>Encapsulates logic that can detect one or more QR Codes in an image, even if the QR Code
@@ -15,13 +16,13 @@ class MultiDetector extends QRDetector {
    * @return {BitMatrix[]}
    * TODO: replace return value to DetectorResult class.
    */
-  public detectMulti(): BitMatrix[] {
+  public detectMulti(hints?: Map<DecodeHint, any>): BitMatrix[] {
     const finderPatternFinder = new MultiFinderPatternFinder(
       this._bits,
       this._width,
       this._height
     );
-    const finderPatterns = finderPatternFinder.findMulti();
+    const finderPatterns = finderPatternFinder.findMulti(hints);
 
     const results: BitMatrix[] = [];
     finderPatterns.forEach(pattern => {

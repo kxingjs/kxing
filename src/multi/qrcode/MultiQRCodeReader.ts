@@ -4,6 +4,7 @@ import Result from "../../Result";
 import BarcodeFormat from "../../BarcodeFormat";
 import MultiDetector from "./detector/MultiDetector";
 import BitMatrix from "../../common/BitMatrix";
+import DecodeHint from "../../DecodeHint";
 
 /**
  * This implementation can detect and decode multiple QR Codes in an image.
@@ -19,14 +20,17 @@ class MultiQRCodeReader extends QRCodeReader implements MultipleBarcodeReader {
    * @return {Result[]}
    * @override
    */
-  public decodeMultiple(image: ImageData): Result[] {
+  public decodeMultiple(
+    image: ImageData,
+    hints?: Map<DecodeHint, any>
+  ): Result[] {
     const results: Result[] = [];
     const detector = new MultiDetector(image);
-    const detectedCodes: BitMatrix[] = detector.detectMulti();
+    const detectedCodes: BitMatrix[] = detector.detectMulti(hints);
 
     detectedCodes.forEach(barcode => {
       try {
-        const decorded = this._decode(barcode);
+        const decorded = this.decoder.decode(barcode);
         results.push(
           new Result(decorded.text, decorded.rawBytes, BarcodeFormat.QR_CODE)
         );

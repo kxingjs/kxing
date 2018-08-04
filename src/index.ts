@@ -32,6 +32,8 @@ export { default as BarcodeFormat } from "./BarcodeFormat";
 export { default as Reader } from "./Reader";
 export { default as QRCodeReader } from "./qrcode/QRCodeReader";
 
+export { default as DecodeHint } from "./DecodeHint";
+
 export {
   default as MultipleBarcodeReader
 } from "./multi/MultipleBarcodeReader";
