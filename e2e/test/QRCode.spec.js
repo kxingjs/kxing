@@ -6,32 +6,73 @@ const textCases = {
   single: {
     NumericOnly: [
       {
-        fileName: "qrcode-num-single.png",
+        fileName: "qrcode_num.png",
         expectedText: "1029384756",
-        description: "should decode numeric only single QRCode."
+        description: "should decode single QRCode."
       },
       {
-        fileName: "qrcode-num-single-rotate.png",
-        expectedText: "1029384756",
-        description: "should decode rotated numeric only QRCode."
-      },
-      {
-        fileName: "qrcode-num-single-large-margin.png",
+        fileName: "qrcode_num_large-margin.png",
         expectedText: "1029384756",
         description: "should decode QRCode in large margin image.",
         hints: tryHarderHint
+      },
+      {
+        fileName: "qrcode_num_rotate-0-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated 0 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate-30-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated 30 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate-45-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated 45 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate-60-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated 60 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate-90-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated 90 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate--30-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated -30 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate--45-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated -45 degrees."
+      },
+      {
+        fileName: "qrcode_num_rotate--60-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated -60 degrees."
+      },
+
+      {
+        fileName: "qrcode_num_rotate--90-deg.png",
+        expectedText: "1029384756",
+        description: "should decode QRCode rotated -90 degrees."
       }
     ],
     Alphanumeric: [
       {
-        fileName: "qrcode-alpha-single.png",
+        fileName: "qrcode_alpha.png",
         expectedText: "1234567890 %\\*+-./:QWERTYUIOP",
-        description: "should decode single QRCode."
+        description: "should decode QRCode."
       },
       {
-        fileName: "qrcode-alpha-single-rotate.png",
+        fileName: "qrcode_alpha_rotate.png",
         expectedText: "1234567890 %\\*+-./:QWERTYUIOP",
-        description: "should decode rotated alphanumeric QRCode."
+        description: "should decode QRCode rotated."
       }
     ]
   },
@@ -42,7 +83,7 @@ const textCases = {
       description: "should decode multi QRCodes"
     },
     {
-      fileName: "qrcode-multi-large-margin.png",
+      fileName: "qrcode-multi_large-margin.png",
       expectedTexts: ["1234567890 %\\*+-./:QWERTYUIOP", "1029384756"],
       description: "should decode multi QRCodes in image having large margin",
       hints: tryHarderHint
@@ -52,55 +93,47 @@ const textCases = {
 
 describe("QRCode", function() {
   describe("QRCodeReader#decode", function() {
-    describe("Numeric only mode", function() {
-      const reader = KXing.getReader();
-
-      textCases.single.NumericOnly.forEach(textCase => {
-        const { description, fileName, hints, expectedText } = textCase;
-        const path = `${PROXIED_BASE_URL}${fileName}`;
-
-        it(description, async () => {
-          const image = await KXing.ImageLoader.load(path);
-          const result = reader.decode(image, hints);
-
-          expect(result.text).toEqual(expectedText);
+    describe("Numeric only mode", () => {
+      textCases.single.NumericOnly.forEach(testCase => {
+        it(testCase.description, async () => {
+          await testDecode(testCase);
         });
       });
     });
 
-    describe("Alphanumeric mode", function() {
-      const reader = KXing.getReader();
-
-      textCases.single.Alphanumeric.forEach(textCase => {
-        const { description, fileName, hints, expectedText } = textCase;
-        const path = `${PROXIED_BASE_URL}${fileName}`;
-
-        it(description, async () => {
-          const image = await KXing.ImageLoader.load(path);
-          const result = reader.decode(image, hints);
-
-          expect(result.text).toEqual(expectedText);
-        });
-      });
+    describe("Alphanumeric mode", () => {
+      textCases.single.Alphanumeric.forEach(testCase =>
+        it(testCase.description, async () => await testDecode(testCase))
+      );
     });
   });
 
-  describe("MultiQRCodeReader#decodeMultiple", function() {
-    const reader = KXing.getMultiReader();
-
-    textCases.multi.forEach(textCase => {
-      const { description, fileName, hints, expectedTexts } = textCase;
-      const path = `${PROXIED_BASE_URL}${fileName}`;
-
-      it(description, async () => {
-        const path = `${PROXIED_BASE_URL}${fileName}`;
-
-        const image = await KXing.ImageLoader.load(path);
-        const results = reader.decodeMultiple(image, hints);
-        const resultTexts = results.map(r => r.text);
-
-        expect(resultTexts).toEqual(expectedTexts);
+  describe("MultiQRCodeReader#decodeMultiple", () => {
+    textCases.multi.forEach(testCase => {
+      it(testCase.description, async () => {
+        await testMultiDecode(testCase);
       });
     });
   });
 });
+
+async function testDecode({ fileName, hints, expectedText }) {
+  const path = `${PROXIED_BASE_URL}${fileName}`;
+  const reader = KXing.getReader();
+
+  const image = await KXing.ImageLoader.load(path);
+  const result = reader.decode(image, hints);
+
+  expect(result.text).toEqual(expectedText);
+}
+
+async function testMultiDecode({ fileName, hints, expectedTexts }) {
+  const path = `${PROXIED_BASE_URL}${fileName}`;
+  const reader = KXing.getMultiReader();
+
+  const image = await KXing.ImageLoader.load(path);
+  const results = reader.decodeMultiple(image, hints);
+  const resultTexts = results.map(r => r.text);
+
+  expect(resultTexts).toEqual(expectedTexts);
+}
